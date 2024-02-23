@@ -1,3 +1,9 @@
+let clownScale = 1.5;
+let clownChan = 0;
+
+let lemonPosX = 100;
+let lemonChan = 0;
+
 function setup() {
   // These lines are fitting our canvas
   // where we want in the DOM
@@ -10,8 +16,20 @@ function setup() {
 function draw() {
   background(220);
   drawBackground(0, 0, 1, color(255, 255, 255, 0));
-  drawClown(300, 300, 1.5);
-  drawLemon(100, 300, 0.5, color(246, 232, 52), color(226, 212, 30), color(65, 65, 65), color(249, 249, 249), color(18, 18, 18));
+  drawClown(300, 300, clownScale);
+  drawLemon(lemonPosX, 300, 0.5, color(246, 232, 52), color(226, 212, 30), color(65, 65, 65), color(249, 249, 249), color(18, 18, 18));
+
+  clownScale = clownScale - clownChan;
+
+  lemonPosX = lemonPosX - lemonChan;
+  
+  if (clownScale <= 0.5) {
+    clownChan = 0;
+  }
+
+  if (lemonPosX <= -100) {
+    lemonChan = 0;
+  }
 }
 
 function drawClown(x, y, s) {
@@ -142,4 +160,9 @@ function drawBackground(x, y, s, tr) {
   fill(tr);
   rect(0, 0, 400, 400);
   pop();
+}
+
+function mouseClicked() {
+  clownChan = 0.05;
+  lemonChan = 9;
 }
